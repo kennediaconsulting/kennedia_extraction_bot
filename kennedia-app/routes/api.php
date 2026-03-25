@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookletLogController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\GithubController;
 use App\Http\Controllers\SearchController;
@@ -11,6 +12,8 @@ use App\Http\Controllers\SearchController;
 Route::middleware(['web', 'App\Http\Middleware\CheckAuth'])->group(function () {
     Route::post('/upload', [DocumentController::class, 'upload']);
     Route::get('/documents', [DocumentController::class, 'index']);
+    Route::get('/dashboard-stats', [DocumentController::class, 'dashboardStats']);
+    Route::get('/booklet-logs', [BookletLogController::class, 'index']);
     Route::delete('/documents/{doc}', [DocumentController::class, 'delete']);
 });
 

@@ -83,6 +83,9 @@ def main():
     result_upload_url = os.getenv('RESULT_UPLOAD_URL', '')
     result_upload_token = os.getenv('RESULT_UPLOAD_TOKEN', '')
     doc_id = os.getenv('DOC_ID', '')
+    page_start_env = os.getenv('PAGE_START', '').strip()
+    page_end_env = os.getenv('PAGE_END', '').strip()
+    pages_requested_env = os.getenv('PAGES_REQUESTED', '').strip()
 
     base = os.path.splitext(os.path.basename(original_filename))[0]
     pattern = os.path.join(chunks_dir, f"{base}-p*/*.csv")
@@ -128,12 +131,28 @@ def main():
         max_docx_rows = 3000
     paths = save_outputs(df_all, base, out_dir, skip_docx=skip_docx, max_docx_rows=max_docx_rows)
 
+    pages_processed = 0
+    if page_start_env and page_end_env:
+        try:
+            pages_processed = max(0, int(page_end_env) - int(page_start_env) + 1)
+        except Exception:
+            pages_processed = 0
+    elif pages_requested_env:
+        try:
+            pages_processed = max(0, int(pages_requested_env))
+        except Exception:
+            pages_processed = 0
+
     summary = {
         'status': 'success',
-        'counts': { 'rows': int(after) },
+        'counts': {
+            'rows': int(after),
+            'pages_processed': int(pages_processed),
+        },
         'chunks': len(frames),
         'files': paths,
         'filename': original_filename,
+        'doc_id': doc_id,
     }
 
     # Upload to app

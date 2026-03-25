@@ -10,6 +10,26 @@ use Illuminate\Support\Facades\Storage;
 
 class GithubController extends Controller
 {
+    private function parseSummary(Request $req): array
+    {
+        $summaryRaw = $req->input('summary');
+        if (!is_string($summaryRaw) || trim($summaryRaw) === '') {
+            return [];
+        }
+
+        $decoded = json_decode($summaryRaw, true);
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    private function fallbackProcessedPages(Document $doc): int
+    {
+        if ($doc->page_start && $doc->page_end && $doc->page_end >= $doc->page_start) {
+            return (int) ($doc->page_end - $doc->page_start + 1);
+        }
+
+        return (int) ($doc->pages_requested ?? 0);
+    }
+
     public function callback(Request $req)
     {
         $sig = $req->header('X-Extractor-Signature');
@@ -29,12 +49,22 @@ class GithubController extends Controller
         }
 
         $payload = $req->json()->all();
-        $doc = Document::where('filename', $payload['filename'] ?? '')->latest()->first();
+        $docId = isset($payload['doc_id']) ? (int) $payload['doc_id'] : 0;
+        $doc = $docId > 0
+            ? Document::find($docId)
+            : Document::where('filename', $payload['filename'] ?? '')->latest()->first();
         if (!$doc) return response()->noContent();
+
+        $counts = is_array($payload['counts'] ?? null) ? $payload['counts'] : [];
+        $processedPages = (int) ($counts['pages_processed'] ?? 0);
+        if ($processedPages <= 0) {
+            $processedPages = $this->fallbackProcessedPages($doc);
+        }
 
         // Do not overwrite URLs from the upload-results step with runner-local paths like "outputs/*.csv".
         // Only mark status complete here and (optionally) set URLs if they are absolute http(s) links and current fields are empty.
         $doc->status = 'complete';
+        $doc->pages_processed = $processedPages;
         $files = $payload['files'] ?? [];
         $csv = $files['csv'] ?? null;
         $xlsx = $files['xlsx'] ?? null;
@@ -46,21 +76,7 @@ class GithubController extends Controller
         }
         $doc->save();
 
-        if (!empty($payload['rows']) && is_array($payload['rows'])) {
-            foreach ($payload['rows'] as $r) {
-                Student::create([
-                    'document_id' => $doc->id,
-                    'surname' => $r['surname'] ?? '',
-                    'first_name' => $r['first_name'] ?? '',
-                    'other_name' => $r['other_name'] ?? '',
-                    'course_studied' => $r['course_studied'] ?? null,
-                    'faculty' => $r['faculty'] ?? null,
-                    'grade' => $r['grade'] ?? null,
-                    'qualification_obtained' => $r['qualification_obtained'] ?? null,
-                    'session' => $r['session'] ?? null,
-                ]);
-            }
-        }
+        // Student rows are imported from uploadResults() to keep counting deterministic.
         return response()->json(['ok' => true]);
     }
 
@@ -85,9 +101,16 @@ class GithubController extends Controller
         $doc = Document::find($docId);
         if (!$doc) abort(404);
 
+        $summary = $this->parseSummary($req);
+        $counts = is_array($summary['counts'] ?? null) ? $summary['counts'] : [];
+
         $csvFile = $req->file('csv');
         $xlsxFile = $req->file('xlsx');
         $docxFile = $req->file('docx');
+
+        $rowsInserted = 0;
+        // Keep per-document row counts clean by replacing previously imported rows.
+        Student::where('document_id', $doc->id)->delete();
 
         if ($csvFile) {
             $csvPath = $csvFile->store('processed', 'public');
@@ -108,6 +131,7 @@ class GithubController extends Controller
                         'qualification_obtained' => $data['qualification_obtained'] ?? null,
                         'session' => $data['session'] ?? $doc->session,
                     ]);
+                    $rowsInserted++;
                 }
                 fclose($h);
             }
@@ -115,7 +139,14 @@ class GithubController extends Controller
         if ($xlsxFile) { $xlsxPath = $xlsxFile->store('processed', 'public'); $doc->xlsx_url = Storage::disk('public')->url($xlsxPath); }
         if ($docxFile) { $docxPath = $docxFile->store('processed', 'public'); $doc->docx_url = Storage::disk('public')->url($docxPath); }
 
+        $processedPages = (int) ($counts['pages_processed'] ?? 0);
+        if ($processedPages <= 0) {
+            $processedPages = $this->fallbackProcessedPages($doc);
+        }
+
         $doc->status = 'complete';
+        $doc->pages_processed = $processedPages;
+        $doc->pages_with_results = $rowsInserted > 0 ? $processedPages : 0;
         $doc->save();
         return response()->json(['ok' => true, 'doc' => $doc]);
     }

@@ -22,17 +22,54 @@
                         <p class="m-0 text-xs opacity-90">Convocation PDF Extraction Console</p>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
-                        Logout
-                    </button>
-                </form>
+                <div class="flex items-center gap-2">
+                    <a href="{{ route('booklet.log') }}" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
+                        Booklet Log
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
+                            Logout
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-6">
+        <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
+            <article class="relative overflow-hidden rounded-2xl border border-emerald-300/70 bg-gradient-to-br from-emerald-100 via-white to-lime-100 p-4 shadow-sm">
+                <div class="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-emerald-300/30 blur-2xl"></div>
+                <h2 class="text-sm font-semibold text-gray-700">Booklets uploaded</h2>
+                <div class="mt-3 space-y-1">
+                    <p class="text-xs text-gray-500">Today: <span id="bookletsToday" class="font-semibold text-gray-900">0</span></p>
+                    <p class="text-xs text-gray-500">This Month: <span id="bookletsMonth" class="font-semibold text-gray-900">0</span></p>
+                    <p class="text-xs text-gray-500">Total: <span id="bookletsTotal" class="font-semibold text-gray-900">0</span></p>
+                </div>
+            </article>
+
+            <article class="relative overflow-hidden rounded-2xl border border-cyan-300/70 bg-gradient-to-br from-cyan-100 via-white to-sky-100 p-4 shadow-sm">
+                <div class="absolute -bottom-10 -left-10 w-28 h-28 rounded-full bg-cyan-300/30 blur-2xl"></div>
+                <h2 class="text-sm font-semibold text-gray-700">PDFs successfully extracted</h2>
+                <div class="mt-3 space-y-1">
+                    <p class="text-xs text-gray-500">Today: <span id="pdfsToday" class="font-semibold text-gray-900">0</span></p>
+                    <p class="text-xs text-gray-500">This Month: <span id="pdfsMonth" class="font-semibold text-gray-900">0</span></p>
+                    <p class="text-xs text-gray-500">Total: <span id="pdfsTotal" class="font-semibold text-gray-900">0</span></p>
+                </div>
+            </article>
+
+            <article class="relative overflow-hidden rounded-2xl border border-amber-300/70 bg-gradient-to-br from-amber-100 via-white to-orange-100 p-4 shadow-sm">
+                <div class="absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-300/30 blur-2xl"></div>
+                <h2 class="text-sm font-semibold text-gray-700">Pages successfully extracted</h2>
+                <div class="mt-3 space-y-1">
+                    <p class="text-xs text-gray-500">Today: <span id="pagesToday" class="font-semibold text-gray-900">0</span></p>
+                    <p class="text-xs text-gray-500">This Month: <span id="pagesMonth" class="font-semibold text-gray-900">0</span></p>
+                    <p class="text-xs text-gray-500">Total: <span id="pagesTotal" class="font-semibold text-gray-900">0</span></p>
+                </div>
+            </article>
+        </section>
+
         <section class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-6">
             <h2 class="text-xl font-semibold mb-4">Upload Convocation PDF</h2>
             <form id="uploadForm" class="space-y-3" method="POST" action="javascript:void(0);" onsubmit="return false;">

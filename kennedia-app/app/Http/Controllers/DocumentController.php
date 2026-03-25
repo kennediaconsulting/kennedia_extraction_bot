@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -22,12 +23,22 @@ class DocumentController extends Controller
         ]);
         $file = $req->file('file');
         $path = $file->store('convocation', 'public');
+        $pageStart = $req->filled('start_page') ? (int) $req->input('start_page') : null;
+        $pageEnd = $req->filled('end_page') ? (int) $req->input('end_page') : null;
+        $pagesRequested = ($pageStart && $pageEnd && $pageEnd >= $pageStart)
+            ? ($pageEnd - $pageStart + 1)
+            : null;
+        $apiTier = $req->input('api_key_tier', 'GEMINI_API_KEY_FREE_TIER_1');
 
         $doc = Document::create([
             'filename' => $file->getClientOriginalName(),
             'path' => $path,
             'session' => $req->input('session'),
-            'status' => 'processing'
+            'status' => 'processing',
+            'api_tier' => $apiTier,
+            'page_start' => $pageStart,
+            'page_end' => $pageEnd,
+            'pages_requested' => $pagesRequested,
         ]);
 
     // Extend expiry to 24h to accommodate long/parallel processing in CI
@@ -42,7 +53,8 @@ class DocumentController extends Controller
                 'callback_url' => url(route('github.callback', [], false)),
                 'result_upload_url' => url(route('github.uploadResults', [], false)),
                 'doc_id' => (string)$doc->id,
-                'api_key_tier' => $req->input('api_key_tier', 'GEMINI_API_KEY_FREE_TIER_1'),
+                'api_key_tier' => $apiTier,
+                'pages_requested' => $pagesRequested,
             ];
             // Forward optional page range to workflow (agent.py runner will read PAGE_START/PAGE_END)
             if ($req->filled('start_page')) {
@@ -132,5 +144,43 @@ class DocumentController extends Controller
         $doc->delete();
         
         return response()->json(['deleted' => true]);
+    }
+
+    public function dashboardStats()
+    {
+        $now = Carbon::now();
+
+        $today = [$now->copy()->startOfDay(), $now->copy()->endOfDay()];
+        $month = [$now->copy()->startOfMonth(), $now->copy()->endOfMonth()];
+
+        $uploadsToday = Document::whereBetween('created_at', $today)->count();
+        $uploadsMonth = Document::whereBetween('created_at', $month)->count();
+        $uploadsTotal = Document::count();
+
+        $successfulToday = Document::where('status', 'complete')->whereBetween('created_at', $today)->count();
+        $successfulMonth = Document::where('status', 'complete')->whereBetween('created_at', $month)->count();
+        $successfulTotal = Document::where('status', 'complete')->count();
+
+        $pagesToday = (int) Document::where('status', 'complete')->whereBetween('created_at', $today)->sum('pages_processed');
+        $pagesMonth = (int) Document::where('status', 'complete')->whereBetween('created_at', $month)->sum('pages_processed');
+        $pagesTotal = (int) Document::where('status', 'complete')->sum('pages_processed');
+
+        return response()->json([
+            'booklets_uploaded' => [
+                'today' => (int) $uploadsToday,
+                'this_month' => (int) $uploadsMonth,
+                'total' => (int) $uploadsTotal,
+            ],
+            'pdfs_successfully_extracted' => [
+                'today' => (int) $successfulToday,
+                'this_month' => (int) $successfulMonth,
+                'total' => (int) $successfulTotal,
+            ],
+            'pages_successfully_extracted' => [
+                'today' => $pagesToday,
+                'this_month' => $pagesMonth,
+                'total' => $pagesTotal,
+            ],
+        ]);
     }
 }

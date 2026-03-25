@@ -11,4 +11,10 @@ Route::middleware(['App\Http\Middleware\CheckAuth'])->group(function () {
     Route::get('/', function () {
         return view('convocation');
     })->name('dashboard');
+
+    Route::get('/booklet-log', function () {
+        return view('booklet-log', [
+            'userName' => (string) session('user_name', 'User'),
+        ]);
+    })->name('booklet.log');
 });

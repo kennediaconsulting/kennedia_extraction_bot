@@ -122,9 +122,13 @@ def main() -> int:
 
     summary = {
         'status': 'success',
-        'counts': {'rows': int(len(df))},
+        'counts': {
+            'rows': int(len(df)),
+            'pages_processed': int((page_end - page_start + 1) if page_end else 0),
+        },
         'files': {'csv': csv_path, 'xlsx': xlsx_path},
         'filename': original_filename,
+        'doc_id': doc_id,
     }
 
     # Upload to app

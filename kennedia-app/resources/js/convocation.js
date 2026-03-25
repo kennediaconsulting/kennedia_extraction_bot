@@ -1,6 +1,7 @@
 const API = {
   upload: '/api/upload',
   list: '/api/documents',
+  dashboardStats: '/api/dashboard-stats',
   delete: (id) => `/api/documents/${id}`
 }
 
@@ -57,6 +58,7 @@ function adjustDelay({ anyProcessing, fromPoll }){
 
 document.addEventListener('DOMContentLoaded', () => {
   const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+  loadDashboardStats()
   loadDocs({ fromPoll: false })
 
   // If user returns to the tab and there are still items processing,
@@ -196,6 +198,7 @@ async function loadDocs(opts = {}){
     })
     const list = await r.json()
     renderDocs(list)
+    loadDashboardStats()
 
     const any = hasProcessing(list)
     const next = adjustDelay({ anyProcessing: any, fromPoll: !!opts.fromPoll })
@@ -208,6 +211,39 @@ async function loadDocs(opts = {}){
     // ignore
   } finally {
     pollInFlight = false
+  }
+}
+
+function setText(id, value){
+  const node = document.getElementById(id)
+  if (node) node.textContent = Number(value || 0).toLocaleString()
+}
+
+async function loadDashboardStats(){
+  try {
+    const r = await fetch(API.dashboardStats, {
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    if (!r.ok) return
+    const data = await r.json()
+
+    setText('bookletsToday', data?.booklets_uploaded?.today)
+    setText('bookletsMonth', data?.booklets_uploaded?.this_month)
+    setText('bookletsTotal', data?.booklets_uploaded?.total)
+
+    setText('pdfsToday', data?.pdfs_successfully_extracted?.today)
+    setText('pdfsMonth', data?.pdfs_successfully_extracted?.this_month)
+    setText('pdfsTotal', data?.pdfs_successfully_extracted?.total)
+
+    setText('pagesToday', data?.pages_successfully_extracted?.today)
+    setText('pagesMonth', data?.pages_successfully_extracted?.this_month)
+    setText('pagesTotal', data?.pages_successfully_extracted?.total)
+  } catch (err) {
+    // Best-effort card refresh; failures here should not block uploads/table rendering.
   }
 }
 
