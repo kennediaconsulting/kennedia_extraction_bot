@@ -38,34 +38,34 @@
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-6">
-        <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
-            <article class="relative overflow-hidden rounded-2xl border border-emerald-300/70 bg-gradient-to-br from-emerald-100 via-white to-lime-100 p-4 shadow-sm">
+        <section class="grid grid-cols-3 gap-4 mb-6">
+            <article class="relative overflow-hidden rounded-2xl border border-emerald-300/70 bg-gradient-to-br from-emerald-100 via-white to-lime-100 p-5 shadow-sm w-full min-h-[165px]">
                 <div class="absolute -top-8 -right-8 w-28 h-28 rounded-full bg-emerald-300/30 blur-2xl"></div>
-                <h2 class="text-sm font-semibold text-gray-700">Booklets uploaded</h2>
-                <div class="mt-3 space-y-1">
-                    <p class="text-xs text-gray-500">Today: <span id="bookletsToday" class="font-semibold text-gray-900">0</span></p>
-                    <p class="text-xs text-gray-500">This Month: <span id="bookletsMonth" class="font-semibold text-gray-900">0</span></p>
-                    <p class="text-xs text-gray-500">Total: <span id="bookletsTotal" class="font-semibold text-gray-900">0</span></p>
+                <h2 class="text-base font-bold text-gray-800 leading-tight">Booklets uploaded</h2>
+                <div class="mt-4 space-y-2">
+                    <p class="text-sm font-semibold text-gray-700">Today: <span id="bookletsToday" class="font-bold text-gray-900">0</span></p>
+                    <p class="text-sm font-semibold text-gray-700">This Month: <span id="bookletsMonth" class="font-bold text-gray-900">0</span></p>
+                    <p class="text-sm font-semibold text-gray-700">Total: <span id="bookletsTotal" class="font-bold text-gray-900">0</span></p>
                 </div>
             </article>
 
-            <article class="relative overflow-hidden rounded-2xl border border-cyan-300/70 bg-gradient-to-br from-cyan-100 via-white to-sky-100 p-4 shadow-sm">
+            <article class="relative overflow-hidden rounded-2xl border border-cyan-300/70 bg-gradient-to-br from-cyan-100 via-white to-sky-100 p-5 shadow-sm w-full min-h-[165px]">
                 <div class="absolute -bottom-10 -left-10 w-28 h-28 rounded-full bg-cyan-300/30 blur-2xl"></div>
-                <h2 class="text-sm font-semibold text-gray-700">PDFs successfully extracted</h2>
-                <div class="mt-3 space-y-1">
-                    <p class="text-xs text-gray-500">Today: <span id="pdfsToday" class="font-semibold text-gray-900">0</span></p>
-                    <p class="text-xs text-gray-500">This Month: <span id="pdfsMonth" class="font-semibold text-gray-900">0</span></p>
-                    <p class="text-xs text-gray-500">Total: <span id="pdfsTotal" class="font-semibold text-gray-900">0</span></p>
+                <h2 class="text-base font-bold text-gray-800 leading-tight">PDFs successfully extracted</h2>
+                <div class="mt-4 space-y-2">
+                    <p class="text-sm font-semibold text-gray-700">Today: <span id="pdfsToday" class="font-bold text-gray-900">0</span></p>
+                    <p class="text-sm font-semibold text-gray-700">This Month: <span id="pdfsMonth" class="font-bold text-gray-900">0</span></p>
+                    <p class="text-sm font-semibold text-gray-700">Total: <span id="pdfsTotal" class="font-bold text-gray-900">0</span></p>
                 </div>
             </article>
 
-            <article class="relative overflow-hidden rounded-2xl border border-amber-300/70 bg-gradient-to-br from-amber-100 via-white to-orange-100 p-4 shadow-sm">
+            <article class="relative overflow-hidden rounded-2xl border border-amber-300/70 bg-gradient-to-br from-amber-100 via-white to-orange-100 p-5 shadow-sm w-full min-h-[165px]">
                 <div class="absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-300/30 blur-2xl"></div>
-                <h2 class="text-sm font-semibold text-gray-700">Pages successfully extracted</h2>
-                <div class="mt-3 space-y-1">
-                    <p class="text-xs text-gray-500">Today: <span id="pagesToday" class="font-semibold text-gray-900">0</span></p>
-                    <p class="text-xs text-gray-500">This Month: <span id="pagesMonth" class="font-semibold text-gray-900">0</span></p>
-                    <p class="text-xs text-gray-500">Total: <span id="pagesTotal" class="font-semibold text-gray-900">0</span></p>
+                <h2 class="text-base font-bold text-gray-800 leading-tight">Pages successfully extracted</h2>
+                <div class="mt-4 space-y-2">
+                    <p class="text-sm font-semibold text-gray-700">Today: <span id="pagesToday" class="font-bold text-gray-900">0</span></p>
+                    <p class="text-sm font-semibold text-gray-700">This Month: <span id="pagesMonth" class="font-bold text-gray-900">0</span></p>
+                    <p class="text-sm font-semibold text-gray-700">Total: <span id="pagesTotal" class="font-bold text-gray-900">0</span></p>
                 </div>
             </article>
         </section>
