@@ -9,6 +9,7 @@ from typing import Dict
 
 import requests
 import pandas as pd
+from PyPDF2 import PdfReader
 import sys
 from pathlib import Path
 import importlib.util
@@ -91,6 +92,14 @@ def main() -> int:
         print('[agent] SOURCE_URL or SOURCE_FILE is required')
         return 2
 
+    # Compute page count from the source PDF so pages_processed is available
+    # even when PAGE_END is not explicitly supplied.
+    total_pages = 0
+    try:
+        total_pages = len(PdfReader(tmp_pdf).pages)
+    except Exception as e:
+        print('[agent] Failed to determine total pages:', repr(e))
+
     # Run extractor
     extractor = ConvocationPDFExtractor(api_key=api_key, session=session)
     df = extractor.extract_from_pdf(pdf_path=tmp_pdf, start_page=page_start, end_page=page_end, dpi=dpi)
@@ -120,11 +129,17 @@ def main() -> int:
         df.to_excel(xlsx_path, index=False)
         print('[agent] Wrote XLSX:', xlsx_path)
 
+    pages_processed = 0
+    if page_end:
+        pages_processed = max(0, int(page_end) - int(page_start) + 1)
+    elif total_pages > 0:
+        pages_processed = max(0, int(total_pages) - int(page_start) + 1)
+
     summary = {
         'status': 'success',
         'counts': {
             'rows': int(len(df)),
-            'pages_processed': int((page_end - page_start + 1) if page_end else 0),
+            'pages_processed': int(pages_processed),
         },
         'files': {'csv': csv_path, 'xlsx': xlsx_path},
         'filename': original_filename,

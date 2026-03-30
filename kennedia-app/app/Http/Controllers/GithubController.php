@@ -58,6 +58,9 @@ class GithubController extends Controller
         $counts = is_array($payload['counts'] ?? null) ? $payload['counts'] : [];
         $processedPages = (int) ($counts['pages_processed'] ?? 0);
         if ($processedPages <= 0) {
+            $processedPages = (int) ($doc->pages_processed ?? 0);
+        }
+        if ($processedPages <= 0) {
             $processedPages = $this->fallbackProcessedPages($doc);
         }
 
@@ -140,6 +143,9 @@ class GithubController extends Controller
         if ($docxFile) { $docxPath = $docxFile->store('processed', 'public'); $doc->docx_url = Storage::disk('public')->url($docxPath); }
 
         $processedPages = (int) ($counts['pages_processed'] ?? 0);
+        if ($processedPages <= 0) {
+            $processedPages = (int) ($doc->pages_processed ?? 0);
+        }
         if ($processedPages <= 0) {
             $processedPages = $this->fallbackProcessedPages($doc);
         }
