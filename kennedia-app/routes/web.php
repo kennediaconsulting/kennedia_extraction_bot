@@ -12,6 +12,9 @@ Route::middleware(['App\Http\Middleware\CheckAuth'])->group(function () {
         return view('convocation');
     })->name('dashboard');
 
+    Route::get('/settings', [AuthController::class, 'settings'])->name('settings');
+    Route::post('/settings/password', [AuthController::class, 'updatePassword'])->name('settings.password');
+
     Route::get('/booklet-log', function () {
         return view('booklet-log', [
             'userName' => (string) session('user_name', 'User'),

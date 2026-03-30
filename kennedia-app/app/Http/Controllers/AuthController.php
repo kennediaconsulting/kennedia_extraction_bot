@@ -56,4 +56,42 @@ class AuthController extends Controller
         Session::flush();
         return redirect()->route('login')->with('success', 'Logged out successfully');
     }
+
+    /**
+     * Show user settings page
+     */
+    public function settings()
+    {
+        return view('settings', [
+            'userName' => (string) Session::get('user_name', 'User'),
+            'userEmail' => (string) Session::get('user_email', ''),
+        ]);
+    }
+
+    /**
+     * Update authenticated user's password
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $userId = (int) Session::get('user_id');
+        $user = User::find($userId);
+
+        if (!$user) {
+            return back()->withErrors(['current_password' => 'User account not found.']);
+        }
+
+        if (!Hash::check((string) $request->input('current_password'), (string) $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect.'])->withInput();
+        }
+
+        $user->password = (string) $request->input('password');
+        $user->save();
+
+        return back()->with('success', 'Password updated successfully.');
+    }
 }

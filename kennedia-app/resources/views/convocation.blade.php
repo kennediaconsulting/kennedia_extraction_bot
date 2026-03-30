@@ -26,6 +26,9 @@
                     <a href="{{ route('booklet.log') }}" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
                         Booklet Log
                     </a>
+                    <a href="{{ route('settings') }}" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
+                        Settings
+                    </a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
@@ -148,27 +151,6 @@
             </div>
         </section>
 
-        <section class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm mb-6">
-            <h2 class="text-xl font-semibold mb-3">Extracted Students</h2>
-            <div class="overflow-auto">
-                <table class="w-full text-sm border-collapse" id="resultsTable">
-                    <thead>
-                        <tr class="bg-gray-50 text-gray-900">
-                            <th class="text-left p-2 border-b">Surname</th>
-                            <th class="text-left p-2 border-b">First Name</th>
-                            <th class="text-left p-2 border-b">Other Name</th>
-                            <th class="text-left p-2 border-b">Course</th>
-                            <th class="text-left p-2 border-b">Faculty</th>
-                            <th class="text-left p-2 border-b">Grade</th>
-                            <th class="text-left p-2 border-b">Qualification</th>
-                            <th class="text-left p-2 border-b">Session</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div id="searchMsg" class="text-sm text-gray-600 mt-2"></div>
-        </section>
     </main>
 
     <footer class="text-center text-emerald-950 py-6">
