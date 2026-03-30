@@ -56,7 +56,7 @@ Required repo secrets:
 - `RESULT_UPLOAD_TOKEN` -> must equal `EXTRACTOR_BEARER_TOKEN` in Laravel `.env`.
 
 Important app settings:
-- Set `APP_URL` to your live domain (e.g., `https://search.riskcontrolnigeria.com`).
+- Set `APP_URL` to your live domain (e.g., `https://extraction.kennediaverification.com`).
 - We force HTTPS and use `URL::temporarySignedRoute` for downloads. Expiry is set to 24h for reliability..
 
 Optional knob in client payload:

@@ -2,6 +2,8 @@ name: Process Convocation PDF
 on:
   repository_dispatch:
     types: [process_pdf]
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 concurrency:
   group: process-pdf-${{ github.event.client_payload.doc_id || github.run_id }}
   cancel-in-progress: false
@@ -13,7 +15,7 @@ jobs:
       matrix: ${{ steps.make.outputs.matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install pdfinfo
         run: |
           sudo apt-get update
@@ -73,9 +75,9 @@ jobs:
     timeout-minutes: 300
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - name: Install system deps
@@ -87,7 +89,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Download source artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           name: source-pdf
           path: .
@@ -139,9 +141,9 @@ jobs:
     timeout-minutes: 300
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
       - name: Install Python deps
@@ -149,7 +151,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Download chunks
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           path: chunks
           merge-multiple: true
@@ -175,9 +177,9 @@ jobs:
           find chunks -type f -name "${base}-p*.csv" | sort | head -n 20
       - name: "Preflight: connectivity check (5s timeout)"
         env:
-          RESULT_UPLOAD_URL: ${{ github.event.client_payload.result_upload_url || 'https://search.riskcontrolnigeria.com/api/github/upload-results' }}
+          RESULT_UPLOAD_URL: ${{ github.event.client_payload.result_upload_url || 'https://extraction.kennediaverification.com/api/github/upload-results' }}
           RESULT_UPLOAD_TOKEN: ${{ secrets.RESULT_UPLOAD_TOKEN }}
-          CALLBACK_URL: ${{ github.event.client_payload.callback_url || 'https://search.riskcontrolnigeria.com/api/github/callback' }}
+          CALLBACK_URL: ${{ github.event.client_payload.callback_url || 'https://extraction.kennediaverification.com/api/github/callback' }}
         run: |
           set -euo pipefail
           # Helper to run a short POST and only fail on connection errors/timeouts
@@ -210,9 +212,9 @@ jobs:
       - name: Aggregate and upload (merge CSVs and XLSX only)
         env:
           ORIGINAL_FILENAME: ${{ github.event.client_payload.original_filename }}
-          CALLBACK_URL: ${{ github.event.client_payload.callback_url || 'https://search.riskcontrolnigeria.com/api/github/callback' }}
+          CALLBACK_URL: ${{ github.event.client_payload.callback_url || 'https://extraction.kennediaverification.com/api/github/callback' }}
           CALLBACK_HMAC_SECRET: ${{ secrets.CALLBACK_HMAC_SECRET }}
-          RESULT_UPLOAD_URL: ${{ github.event.client_payload.result_upload_url || 'https://search.riskcontrolnigeria.com/api/github/upload-results' }}
+          RESULT_UPLOAD_URL: ${{ github.event.client_payload.result_upload_url || 'https://extraction.kennediaverification.com/api/github/upload-results' }}
           RESULT_UPLOAD_TOKEN: ${{ secrets.RESULT_UPLOAD_TOKEN }}
           DOC_ID: ${{ github.event.client_payload.doc_id }}
           AGG_SKIP_DOCX: 'true'
