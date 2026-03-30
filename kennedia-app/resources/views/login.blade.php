@@ -43,7 +43,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login.submit') }}" class="space-y-5">
+                <form id="loginForm" method="POST" action="{{ route('login.submit') }}" class="space-y-5">
                     @csrf
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
@@ -72,10 +72,15 @@
                     </div>
 
                     <button 
+                        id="loginSubmitBtn"
                         type="submit"
-                        class="w-full bg-[#2d9657] hover:bg-[#206d43] text-white font-semibold px-4 py-3 rounded-lg transition duration-200 shadow-md hover:shadow-lg"
+                        class="w-full bg-[#2d9657] hover:bg-[#206d43] text-white font-semibold px-4 py-3 rounded-lg transition duration-200 shadow-md hover:shadow-lg inline-flex items-center justify-center gap-2"
                     >
-                        Sign In
+                        <span id="loginSubmitText">Sign In</span>
+                        <svg id="loginSubmitSpinner" class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"></path>
+                        </svg>
                     </button>
                 </form>
 
@@ -91,5 +96,20 @@
             <p class="text-sm text-gray-600">© {{ date('Y') }} Kennedia Consulting</p>
         </div>
     </div>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+        const loginSubmitText = document.getElementById('loginSubmitText');
+        const loginSubmitSpinner = document.getElementById('loginSubmitSpinner');
+
+        if (loginForm && loginSubmitBtn && loginSubmitText && loginSubmitSpinner) {
+            loginForm.addEventListener('submit', () => {
+                loginSubmitBtn.disabled = true;
+                loginSubmitBtn.classList.add('opacity-60', 'cursor-not-allowed');
+                loginSubmitText.textContent = 'Signing In...';
+                loginSubmitSpinner.classList.remove('hidden');
+            });
+        }
+    </script>
 </body>
 </html>
