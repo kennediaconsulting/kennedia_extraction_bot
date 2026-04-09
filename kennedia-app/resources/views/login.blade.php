@@ -61,14 +61,32 @@
 
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2d9657] focus:border-[#2d9657] outline-none transition"
-                            placeholder="••••••••"
-                        />
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required
+                                class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2d9657] focus:border-[#2d9657] outline-none transition"
+                                placeholder="••••••••"
+                            />
+                            <button
+                                type="button"
+                                id="togglePasswordBtn"
+                                aria-label="Show password"
+                                class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 hover:text-gray-700"
+                            >
+                                <svg id="eyeOpenIcon" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                                <svg id="eyeClosedIcon" class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C5 20 1 12 1 12a21.77 21.77 0 0 1 5.06-6.94"></path>
+                                    <path d="M9.9 4.24A10.87 10.87 0 0 1 12 4c7 0 11 8 11 8a21.79 21.79 0 0 1-3.18 4.78"></path>
+                                    <path d="M1 1l22 22"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <button 
@@ -101,6 +119,20 @@
         const loginSubmitBtn = document.getElementById('loginSubmitBtn');
         const loginSubmitText = document.getElementById('loginSubmitText');
         const loginSubmitSpinner = document.getElementById('loginSubmitSpinner');
+        const passwordInput = document.getElementById('password');
+        const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+        const eyeOpenIcon = document.getElementById('eyeOpenIcon');
+        const eyeClosedIcon = document.getElementById('eyeClosedIcon');
+
+        if (passwordInput && togglePasswordBtn && eyeOpenIcon && eyeClosedIcon) {
+            togglePasswordBtn.addEventListener('click', () => {
+                const isHidden = passwordInput.type === 'password';
+                passwordInput.type = isHidden ? 'text' : 'password';
+                togglePasswordBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+                eyeOpenIcon.classList.toggle('hidden', isHidden);
+                eyeClosedIcon.classList.toggle('hidden', !isHidden);
+            });
+        }
 
         if (loginForm && loginSubmitBtn && loginSubmitText && loginSubmitSpinner) {
             loginForm.addEventListener('submit', () => {

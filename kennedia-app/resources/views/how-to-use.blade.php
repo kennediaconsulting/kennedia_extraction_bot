@@ -60,7 +60,7 @@
                     </div>
                     <div class="rounded-xl border border-white/20 bg-white/10 px-4 py-3">
                         <div class="text-xs text-white/80">Three-column PDF max</div>
-                        <div class="text-2xl font-bold mt-1">150 pages/upload</div>
+                        <div class="text-2xl font-bold mt-1">100 pages/upload</div>
                     </div>
                     <div class="rounded-xl border border-white/20 bg-white/10 px-4 py-3">
                         <div class="text-xs text-white/80">One-column PDF max</div>
@@ -95,7 +95,7 @@
                             <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                                 <div class="rounded-xl border border-amber-300/60 bg-amber-50 p-3">
                                     <p class="font-semibold text-amber-900">Three-column records</p>
-                                    <p class="text-amber-800 mt-1">Maximum 150 pages per upload.</p>
+                                    <p class="text-amber-800 mt-1">Maximum 100 pages per upload.</p>
                                 </div>
                                 <div class="rounded-xl border border-cyan-300/60 bg-cyan-50 p-3">
                                     <p class="font-semibold text-cyan-900">One-column records</p>
@@ -127,6 +127,19 @@
                 <article class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
                     <div class="flex items-start gap-4">
                         <span class="h-9 w-9 shrink-0 rounded-full bg-slate-900 text-white text-sm font-bold grid place-items-center">4</span>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Remove unnecessary pages before upload</h3>
+                            <p class="mt-2 text-sm text-slate-700 leading-relaxed">
+                                Remove unnecessary pages in the convocation booklet PDF before upload, for example greetings pages,
+                                prize winners pages, and other pages that do not contain student records.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
+                    <div class="flex items-start gap-4">
+                        <span class="h-9 w-9 shrink-0 rounded-full bg-slate-900 text-white text-sm font-bold grid place-items-center">5</span>
                         <div>
                             <h3 class="text-lg font-bold text-slate-900">Do not mix column styles in one upload batch</h3>
                             <p class="mt-2 text-sm text-slate-700 leading-relaxed">
@@ -225,9 +238,9 @@
                 <div class="rounded-xl border border-cyan-200 bg-cyan-50 p-4">
                     <h4 class="text-sm font-bold text-cyan-900">Pages Field Breakdown</h4>
                     <p class="mt-2 text-sm text-cyan-800 leading-relaxed">
-                        <span class="font-semibold">1-150</span> = requested page range (start to end),
-                        <span class="font-semibold">(150)</span> = <span class="font-mono">pages_requested</span>,
-                        <span class="font-semibold">/ 150</span> = <span class="font-mono">pages_processed</span>.
+                        <span class="font-semibold">1-100</span> = requested page range (start to end),
+                        <span class="font-semibold">(100)</span> = <span class="font-mono">pages_requested</span>,
+                        <span class="font-semibold">/ 100</span> = <span class="font-mono">pages_processed</span>.
                     </p>
                 </div>
                 <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
@@ -238,6 +251,28 @@
                     </p>
                 </div>
             </div>
+        </section>
+
+        <section class="mt-8 rounded-2xl border border-rose-200 bg-rose-50 p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-rose-900">Important Notice</h3>
+            <ul class="mt-3 space-y-2 text-sm text-rose-800 leading-relaxed list-disc pl-5">
+                <li>
+                    The bot currently uses the company free GitHub Actions plan for the bot runner, which works best for a maximum of 100 pages per upload.
+                </li>
+                <li>
+                    If any required column is not available in a convocation booklet PDF (for example, degree obtained is not mentioned), the bot may return <span class="font-mono">nan</span>, leave it empty, or provide a similar placeholder value.
+                </li>
+            </ul>
+        </section>
+
+        <section class="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-amber-900">Free Gemini Key Notice</h3>
+            <p class="mt-3 text-sm text-amber-800 leading-relaxed">
+                The guidance above focuses majorly on paid API usage.
+            </p>
+            <p class="mt-2 text-sm text-amber-800 leading-relaxed">
+                For free Gemini API key usage, the recommended limit is only seven pages per day.
+            </p>
         </section>
     </main>
 
