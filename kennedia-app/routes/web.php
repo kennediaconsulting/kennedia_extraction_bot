@@ -20,4 +20,10 @@ Route::middleware(['App\Http\Middleware\CheckAuth'])->group(function () {
             'userName' => (string) session('user_name', 'User'),
         ]);
     })->name('booklet.log');
+
+    Route::get('/how-to-use', function () {
+        return view('how-to-use', [
+            'userName' => (string) session('user_name', 'User'),
+        ]);
+    })->name('how.to.use');
 });

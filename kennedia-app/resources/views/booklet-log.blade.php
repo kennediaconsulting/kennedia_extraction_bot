@@ -26,6 +26,7 @@
                 <div class="flex items-center gap-2">
                     <a href="{{ route('dashboard') }}" class="text-sm px-3 py-2 rounded-lg hover:bg-white/10">Dashboard</a>
                     <a href="{{ route('booklet.log') }}" class="text-sm px-3 py-2 rounded-lg bg-white/10">Booklet Log</a>
+                    <a href="{{ route('how.to.use') }}" class="text-sm px-3 py-2 rounded-lg hover:bg-white/10">How To Use</a>
                     <a href="{{ route('settings') }}" class="text-sm px-3 py-2 rounded-lg hover:bg-white/10">Settings</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

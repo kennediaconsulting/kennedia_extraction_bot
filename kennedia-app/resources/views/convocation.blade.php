@@ -26,6 +26,9 @@
                     <a href="{{ route('booklet.log') }}" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
                         Booklet Log
                     </a>
+                    <a href="{{ route('how.to.use') }}" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
+                        How To Use
+                    </a>
                     <a href="{{ route('settings') }}" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">
                         Settings
                     </a>
