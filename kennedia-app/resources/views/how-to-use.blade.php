@@ -56,7 +56,7 @@
                 <div class="mt-7 grid grid-cols-1 md:grid-cols-3 gap-3">
                     <div class="rounded-xl border border-white/20 bg-white/10 px-4 py-3">
                         <div class="text-xs text-white/80">Daily recommendation</div>
-                        <div class="text-2xl font-bold mt-1">5,000 pages</div>
+                        <div class="text-2xl font-bold mt-1">1,000 pages</div>
                     </div>
                     <div class="rounded-xl border border-white/20 bg-white/10 px-4 py-3">
                         <div class="text-xs text-white/80">Three-column PDF max</div>
@@ -113,7 +113,7 @@
                             <h3 class="text-lg font-bold text-slate-900">Split oversized files before upload</h3>
                             <p class="mt-2 text-sm text-slate-700 leading-relaxed">
                                 If a file exceeds its format limit, split it by faculty where possible.
-                                Example: if a three-column file has 180 pages, find a faculty endpoint at or below page 150,
+                                Example: if a three-column file has 180 pages, find a faculty endpoint at or below page 100,
                                 upload that part first, then upload the remaining pages as a second file.
                             </p>
                             <p class="mt-3 text-sm text-slate-700 leading-relaxed">
@@ -155,8 +155,8 @@
                 <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                     <h3 class="text-base font-bold text-slate-900">Operational recommendations</h3>
                     <p class="mt-2 text-sm text-slate-700 leading-relaxed">
-                        Use a daily cap of <span class="font-semibold">5,000 pages</span> for stable operation.
-                        Different API key tiers can handle higher volume when needed.
+                        Use a daily cap of <span class="font-semibold">1,000 pages</span> for stable operation.
+                        Paid API key tiers can handle higher volume when needed.
                     </p>
                 </div>
 
@@ -172,7 +172,7 @@
                     <h3 class="text-base font-bold text-rose-900">Need support?</h3>
                     <p class="mt-2 text-sm text-rose-800 leading-relaxed">
                         Report unusual behavior, extraction errors, or support requests to
-                        <a class="font-semibold underline decoration-2 underline-offset-2" href="mailto:admin@kennediaconsulting.net">admin@kennediaconsulting.net</a>.
+                        <a class="font-semibold underline decoration-2 underline-offset-2" href="mailto:contact@peldargconsulting.com">contact@peldargconsulting.com</a>.
                     </p>
                 </div>
             </aside>
