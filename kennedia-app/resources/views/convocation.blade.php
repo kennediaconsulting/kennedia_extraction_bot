@@ -104,15 +104,15 @@
                     <label for="api_key_tier" class="font-medium">API Key Selection</label>
                     <select id="api_key_tier" name="api_key_tier" class="rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-[#2d9657]">
                         <option value="GEMINI_API_KEY_FREE_TIER_1" selected>Free Tier 1</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_2">Free Tier 2</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_3">Free Tier 3</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_4">Free Tier 4</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_5">Free Tier 5</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_6">Free Tier 6</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_7">Free Tier 7</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_8">Free Tier 8</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_9">Free Tier 9</option>
-                        <option value="GEMINI_API_KEY_FREE_TIER_10">Free Tier 10</option>
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_2">Free Tier 2</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_3">Free Tier 3</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_4">Free Tier 4</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_5">Free Tier 5</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_6">Free Tier 6</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_7">Free Tier 7</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_8">Free Tier 8</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_9">Free Tier 9</option> --}}
+                        {{-- <option value="GEMINI_API_KEY_FREE_TIER_10">Free Tier 10</option> --}}
                         <option value="GEMINI_API_KEY_PAID">Paid Tier</option>
                     </select>
                 </div>
