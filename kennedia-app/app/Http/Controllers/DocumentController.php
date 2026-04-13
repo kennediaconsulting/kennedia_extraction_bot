@@ -104,6 +104,11 @@ class DocumentController extends Controller
 
     public function index()
     {
+        // Auto-fail any documents stuck in 'processing' for more than 9 hours
+        Document::where('status', 'processing')
+            ->where('created_at', '<=', now()->subHours(9))
+            ->update(['status' => 'failed']);
+
         $docs = Document::latest()->get();
         // Attach signed download links for CSV/XLSX if present
         $docs->transform(function($d){
