@@ -40,6 +40,11 @@ Thumbs.db
 # Artifacts
 outputs/
 
+# cPanel/server-generated files
+default.php
+kennedia-app/.htaccess
+kennedia-app/public/default.php
+
 # Test PDFs (keep only in local testing)
 *.pdf
 !rcs-app/public/*.pdf

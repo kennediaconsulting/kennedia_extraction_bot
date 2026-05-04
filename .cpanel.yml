@@ -1,0 +1,13 @@
+---
+deployment:
+  tasks:
+    - export APPPATH="$(pwd)/kennedia-app"
+    - export DEPLOYPATH="${DEPLOYPATH:-$HOME/public_html/extraction}"
+    - /bin/echo "Deploying from $APPPATH to $DEPLOYPATH"
+    - /bin/mkdir -p "$DEPLOYPATH"
+    - /usr/bin/rsync -a --delete --exclude='.git' --exclude='node_modules' --exclude='.env' "$APPPATH/" "$DEPLOYPATH/"
+    - cd "$DEPLOYPATH"
+    - if command -v composer >/dev/null 2>&1; then composer install --no-dev --optimize-autoloader --no-interaction; fi
+    - if [ -f artisan ]; then php artisan config:clear; php artisan config:cache; php artisan route:cache; php artisan view:cache; fi
+    - if [ -f artisan ]; then php artisan storage:link || true; fi
+    - if [ -d storage ] && [ -d bootstrap/cache ]; then chmod -R 775 storage bootstrap/cache || true; fi
