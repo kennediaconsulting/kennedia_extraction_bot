@@ -4,18 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kennedia Consulting - Booklet Log</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/booklet-log.js'])
 </head>
-<body class="bg-emerald-50/40 text-slate-900" style="font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;">
-    <header class="bg-gradient-to-r from-[#165f3a] to-[#0d3d26] text-white border-b border-white/10">
+<body class="bg-white text-slate-900" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <header class="bg-[#1F6F4A] text-white border-b border-[#1F6F4A]">
         <div class="max-w-6xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between gap-3">
                 <div class="flex items-center gap-3 min-w-0">
                     <div class="w-10 h-10 rounded-xl bg-white/10 ring-1 ring-white/20 backdrop-blur flex items-center justify-center overflow-hidden">
-                        <img src="{{ asset('logo.png') }}" alt="Kennedia Consulting" class="h-7 w-auto" />
+                        <img src="{{ asset('2.png') }}" alt="Kennedia Consulting" class="h-7 w-auto" />
                     </div>
                     <div>
                         <h1 class="m-0 text-lg font-semibold tracking-tight">Kennedia Consulting</h1>
@@ -30,7 +28,7 @@
                     <a href="{{ route('settings') }}" class="text-sm px-3 py-2 rounded-lg hover:bg-white/10">Settings</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-sm px-4 py-2 bg-amber-400 text-slate-950 rounded-lg hover:bg-amber-300 transition">Logout</button>
+                        <button type="submit" class="text-sm px-4 py-2 bg-[#9BC53D] text-[#3A3A3A] rounded-lg hover:bg-[#8ab530] transition">Logout</button>
                     </form>
                 </div>
             </div>
@@ -38,7 +36,7 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-6">
-        <section class="rounded-2xl border border-emerald-200 bg-white p-5 shadow-sm">
+        <section class="rounded-2xl border border-[#1F6F4A]/20 bg-white p-5 shadow-sm">
             <div class="flex items-start justify-between gap-4 flex-wrap">
                 <div>
                     <h2 class="text-2xl font-bold text-slate-900">Booklet Log</h2>
@@ -47,11 +45,11 @@
                 <form id="bookletLogFilterForm" class="flex items-end gap-3 flex-wrap">
                     <div>
                         <label for="filterYear" class="block text-sm font-medium text-slate-700 mb-1">Year</label>
-                        <input id="filterYear" type="number" min="2000" max="2100" placeholder="e.g. 2026" class="rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-emerald-500" />
+                        <input id="filterYear" type="number" min="2000" max="2100" placeholder="e.g. 2026" class="rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1F6F4A]" />
                     </div>
                     <div>
                         <label for="filterMonth" class="block text-sm font-medium text-slate-700 mb-1">Month</label>
-                        <select id="filterMonth" class="rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-emerald-500">
+                        <select id="filterMonth" class="rounded-lg border border-slate-300 px-3 py-2 text-sm outline-none focus:border-[#1F6F4A]">
                             <option value="">All months</option>
                             <option value="1">January</option>
                             <option value="2">February</option>
@@ -67,7 +65,7 @@
                             <option value="12">December</option>
                         </select>
                     </div>
-                    <button type="submit" class="rounded-lg bg-emerald-700 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-800 transition">Apply filter</button>
+                    <button type="submit" class="rounded-lg bg-[#1F6F4A] text-white px-4 py-2 text-sm font-semibold hover:bg-[#9BC53D] transition">Apply filter</button>
                     <button id="clearFilterBtn" type="button" class="rounded-lg border border-slate-300 text-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-100 transition">Clear</button>
                 </form>
             </div>
@@ -88,17 +86,17 @@
                 <div class="text-xs uppercase tracking-wide text-slate-500">All-time extracted student rows</div>
                 <div id="overallRows" class="mt-2 text-3xl font-bold">0</div>
             </article>
-            <article class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 shadow-sm">
-                <div class="text-xs uppercase tracking-wide text-emerald-700">Filtered uploads</div>
-                <div id="filteredUploads" class="mt-2 text-3xl font-bold text-emerald-900">0</div>
+            <article class="rounded-xl border border-[#1F6F4A]/30 bg-white p-4 shadow-sm">
+                <div class="text-xs uppercase tracking-wide text-[#1F6F4A]">Filtered uploads</div>
+                <div id="filteredUploads" class="mt-2 text-3xl font-bold text-[#1F6F4A]">0</div>
             </article>
-            <article class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 shadow-sm">
-                <div class="text-xs uppercase tracking-wide text-emerald-700">Filtered successful PDFs</div>
-                <div id="filteredSuccessful" class="mt-2 text-3xl font-bold text-emerald-900">0</div>
+            <article class="rounded-xl border border-[#1F6F4A]/30 bg-white p-4 shadow-sm">
+                <div class="text-xs uppercase tracking-wide text-[#1F6F4A]">Filtered successful PDFs</div>
+                <div id="filteredSuccessful" class="mt-2 text-3xl font-bold text-[#1F6F4A]">0</div>
             </article>
-            <article class="rounded-xl border border-emerald-200 bg-emerald-50 p-4 shadow-sm">
-                <div class="text-xs uppercase tracking-wide text-emerald-700">Filtered extracted student rows</div>
-                <div id="filteredRows" class="mt-2 text-3xl font-bold text-emerald-900">0</div>
+            <article class="rounded-xl border border-[#1F6F4A]/30 bg-white p-4 shadow-sm">
+                <div class="text-xs uppercase tracking-wide text-[#1F6F4A]">Filtered extracted student rows</div>
+                <div id="filteredRows" class="mt-2 text-3xl font-bold text-[#1F6F4A]">0</div>
             </article>
         </section>
 

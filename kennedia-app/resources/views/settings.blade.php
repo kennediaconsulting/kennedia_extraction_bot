@@ -4,18 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kennedia Consulting - Settings</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css'])
 </head>
-<body class="bg-emerald-50/40 text-gray-900 font-sans">
-    <header class="bg-gradient-to-r from-[#2d9657] to-[#206d43] text-white border-b-4 border-[#1b5b38]">
+<body class="bg-white text-gray-900" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <header class="bg-[#1F6F4A] text-white border-b border-[#1F6F4A]">
         <div class="max-w-5xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="m-0 text-lg font-semibold tracking-tight">Settings</h1>
-                    <p class="m-0 text-xs opacity-90">Manage your account password</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 ring-1 ring-white/20 backdrop-blur flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset('2.png') }}" alt="Kennedia Consulting" class="h-7 w-auto" />
+                    </div>
+                    <div>
+                        <h1 class="m-0 text-lg font-semibold tracking-tight">Settings</h1>
+                        <p class="m-0 text-xs opacity-90">Manage your account password</p>
+                    </div>
                 </div>
                 <div class="flex items-center gap-2">
                     <a href="{{ route('dashboard') }}" class="text-sm px-4 py-2 bg-white/10 ring-1 ring-white/20 text-white rounded-lg hover:bg-white/15 transition">Dashboard</a>
@@ -35,7 +37,7 @@
             <p class="text-sm text-gray-600 mb-4">Signed in as {{ $userEmail }}</p>
 
             @if(session('success'))
-                <div class="mb-4 rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-800 px-3 py-2 text-sm">
+                <div class="mb-4 rounded-lg border border-[#1F6F4A]/40 bg-[#1F6F4A]/5 text-[#1F6F4A] px-3 py-2 text-sm">
                     {{ session('success') }}
                 </div>
             @endif
@@ -54,17 +56,17 @@
                 @csrf
                 <div>
                     <label for="current_password" class="block text-sm font-medium mb-1">Current Password</label>
-                    <input id="current_password" name="current_password" type="password" required class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-[#2d9657]" />
+                    <input id="current_password" name="current_password" type="password" required class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-[#1F6F4A]" />
                 </div>
                 <div>
                     <label for="password" class="block text-sm font-medium mb-1">New Password</label>
-                    <input id="password" name="password" type="password" required minlength="8" class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-[#2d9657]" />
+                    <input id="password" name="password" type="password" required minlength="8" class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-[#1F6F4A]" />
                 </div>
                 <div>
                     <label for="password_confirmation" class="block text-sm font-medium mb-1">Confirm New Password</label>
-                    <input id="password_confirmation" name="password_confirmation" type="password" required minlength="8" class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-[#2d9657]" />
+                    <input id="password_confirmation" name="password_confirmation" type="password" required minlength="8" class="w-full rounded-lg border border-gray-300 px-3 py-2 outline-none focus:border-[#1F6F4A]" />
                 </div>
-                <button type="submit" class="w-full py-3 bg-[#2d9657] text-white font-semibold rounded-lg hover:bg-[#206d43] transition">
+                <button type="submit" class="w-full py-3 bg-[#1F6F4A] text-white font-semibold rounded-lg hover:bg-[#9BC53D] transition">
                     Update Password
                 </button>
             </form>

@@ -4,18 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kennedia Consulting - How To Use</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     @vite(['resources/css/app.css'])
 </head>
-<body class="bg-emerald-50/40 text-slate-900" style="font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;">
-    <header class="bg-gradient-to-r from-[#165f3a] to-[#0d3d26] text-white border-b border-white/10">
+<body class="bg-white text-slate-900" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <header class="bg-[#1F6F4A] text-white border-b border-[#1F6F4A]">
         <div class="max-w-6xl mx-auto px-4 py-4">
             <div class="flex items-center justify-between gap-3">
                 <div class="flex items-center gap-3 min-w-0">
                     <div class="w-10 h-10 rounded-xl bg-white/10 ring-1 ring-white/20 backdrop-blur flex items-center justify-center overflow-hidden">
-                        <img src="{{ asset('logo.png') }}" alt="Kennedia Consulting" class="h-7 w-auto" />
+                        <img src="{{ asset('2.png') }}" alt="Kennedia Consulting" class="h-7 w-auto" />
                     </div>
                     <div>
                         <h1 class="m-0 text-lg font-semibold tracking-tight">Kennedia Consulting</h1>
@@ -30,7 +28,7 @@
                     <a href="{{ route('settings') }}" class="text-sm px-3 py-2 rounded-lg hover:bg-white/10">Settings</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-sm px-4 py-2 bg-amber-400 text-slate-950 rounded-lg hover:bg-amber-300 transition">
+                        <button type="submit" class="text-sm px-4 py-2 bg-[#9BC53D] text-[#3A3A3A] rounded-lg hover:bg-[#8ab530] transition">
                             Logout
                         </button>
                     </form>
@@ -40,13 +38,9 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-8">
-        <section class="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white p-7 md:p-10 shadow-xl">
-            <div class="pointer-events-none absolute inset-0 bg-slate-950/35 z-0"></div>
-            <div class="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-amber-300/20 blur-3xl z-0"></div>
-            <div class="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-emerald-300/20 blur-3xl z-0"></div>
-
+        <section class="relative overflow-hidden rounded-3xl border border-[#1F6F4A] bg-[#1F6F4A] text-white p-7 md:p-10 shadow-xl">
             <div class="relative z-10">
-                <p class="text-xs uppercase tracking-[0.2em] text-amber-300 font-semibold">Convocation Booklet Guide</p>
+                <p class="text-xs uppercase tracking-[0.2em] text-[#9BC53D] font-semibold">Convocation Booklet Guide</p>
                 <h2 class="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight">How To Use The Extraction Platform</h2>
                 <p class="mt-4 text-sm md:text-base text-white/90 max-w-3xl leading-relaxed">
                     This guide helps you prepare files correctly, avoid upload failures, and keep extraction output clean before database import.
@@ -74,7 +68,7 @@
             <div class="lg:col-span-8 space-y-5">
                 <article class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
                     <div class="flex items-start gap-4">
-                        <span class="h-9 w-9 shrink-0 rounded-full bg-slate-900 text-white text-sm font-bold grid place-items-center">1</span>
+                        <span class="h-9 w-9 shrink-0 rounded-full bg-[#1F6F4A] text-white text-sm font-bold grid place-items-center">1</span>
                         <div>
                             <h3 class="text-lg font-bold text-slate-900">Identify the booklet format first</h3>
                             <p class="mt-2 text-sm text-slate-700 leading-relaxed">
@@ -89,17 +83,17 @@
 
                 <article class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
                     <div class="flex items-start gap-4">
-                        <span class="h-9 w-9 shrink-0 rounded-full bg-slate-900 text-white text-sm font-bold grid place-items-center">2</span>
+                        <span class="h-9 w-9 shrink-0 rounded-full bg-[#1F6F4A] text-white text-sm font-bold grid place-items-center">2</span>
                         <div>
                             <h3 class="text-lg font-bold text-slate-900">Apply the correct upload limits</h3>
                             <div class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-                                <div class="rounded-xl border border-amber-300/60 bg-amber-50 p-3">
-                                    <p class="font-semibold text-amber-900">Three-column records</p>
-                                    <p class="text-amber-800 mt-1">Maximum 100 pages per upload.</p>
+                                <div class="rounded-xl border border-[#1F6F4A]/40 bg-[#1F6F4A]/5 p-3">
+                                    <p class="font-semibold text-[#1F6F4A]">Three-column records</p>
+                                    <p class="text-[#3A3A3A] mt-1">Maximum 100 pages per upload.</p>
                                 </div>
-                                <div class="rounded-xl border border-cyan-300/60 bg-cyan-50 p-3">
-                                    <p class="font-semibold text-cyan-900">One-column records</p>
-                                    <p class="text-cyan-800 mt-1">Maximum 200 pages per upload.</p>
+                                <div class="rounded-xl border border-[#9BC53D]/40 bg-[#9BC53D]/10 p-3">
+                                    <p class="font-semibold text-[#3A3A3A]">One-column records</p>
+                                    <p class="text-[#3A3A3A] mt-1">Maximum 200 pages per upload.</p>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +102,7 @@
 
                 <article class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
                     <div class="flex items-start gap-4">
-                        <span class="h-9 w-9 shrink-0 rounded-full bg-slate-900 text-white text-sm font-bold grid place-items-center">3</span>
+                        <span class="h-9 w-9 shrink-0 rounded-full bg-[#1F6F4A] text-white text-sm font-bold grid place-items-center">3</span>
                         <div>
                             <h3 class="text-lg font-bold text-slate-900">Split oversized files before upload</h3>
                             <p class="mt-2 text-sm text-slate-700 leading-relaxed">
@@ -126,7 +120,7 @@
 
                 <article class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
                     <div class="flex items-start gap-4">
-                        <span class="h-9 w-9 shrink-0 rounded-full bg-slate-900 text-white text-sm font-bold grid place-items-center">4</span>
+                        <span class="h-9 w-9 shrink-0 rounded-full bg-[#1F6F4A] text-white text-sm font-bold grid place-items-center">4</span>
                         <div>
                             <h3 class="text-lg font-bold text-slate-900">Remove unnecessary pages before upload</h3>
                             <p class="mt-2 text-sm text-slate-700 leading-relaxed">
@@ -139,7 +133,7 @@
 
                 <article class="rounded-2xl bg-white border border-slate-200 p-6 shadow-sm">
                     <div class="flex items-start gap-4">
-                        <span class="h-9 w-9 shrink-0 rounded-full bg-slate-900 text-white text-sm font-bold grid place-items-center">5</span>
+                        <span class="h-9 w-9 shrink-0 rounded-full bg-[#1F6F4A] text-white text-sm font-bold grid place-items-center">5</span>
                         <div>
                             <h3 class="text-lg font-bold text-slate-900">Do not mix column styles in one upload batch</h3>
                             <p class="mt-2 text-sm text-slate-700 leading-relaxed">
@@ -235,17 +229,17 @@
             </div>
 
             <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="rounded-xl border border-cyan-200 bg-cyan-50 p-4">
-                    <h4 class="text-sm font-bold text-cyan-900">Pages Field Breakdown</h4>
-                    <p class="mt-2 text-sm text-cyan-800 leading-relaxed">
+                <div class="rounded-xl border border-[#1F6F4A]/30 bg-[#1F6F4A]/5 p-4">
+                    <h4 class="text-sm font-bold text-[#1F6F4A]">Pages Field Breakdown</h4>
+                    <p class="mt-2 text-sm text-[#3A3A3A] leading-relaxed">
                         <span class="font-semibold">1-100</span> = requested page range (start to end),
                         <span class="font-semibold">(100)</span> = <span class="font-mono">pages_requested</span>,
                         <span class="font-semibold">/ 100</span> = <span class="font-mono">pages_processed</span>.
                     </p>
                 </div>
-                <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
-                    <h4 class="text-sm font-bold text-amber-900">API Tier Selection</h4>
-                    <p class="mt-2 text-sm text-amber-800 leading-relaxed">
+                <div class="rounded-xl border border-[#9BC53D]/40 bg-[#9BC53D]/10 p-4">
+                    <h4 class="text-sm font-bold text-[#3A3A3A]">API Tier Selection</h4>
+                    <p class="mt-2 text-sm text-[#3A3A3A] leading-relaxed">
                         Choose a free tier for routine jobs. Use a higher free tier or paid tier only when processing volume is high
                         or when rate limits are reached on lower tiers.
                     </p>
@@ -265,12 +259,12 @@
             </ul>
         </section>
 
-        <section class="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-sm">
-            <h3 class="text-xl font-bold text-amber-900">Free Gemini Key Notice</h3>
-            <p class="mt-3 text-sm text-amber-800 leading-relaxed">
+        <section class="mt-8 rounded-2xl border border-[#9BC53D]/40 bg-[#9BC53D]/10 p-6 shadow-sm">
+            <h3 class="text-xl font-bold text-[#3A3A3A]">Free Gemini Key Notice</h3>
+            <p class="mt-3 text-sm text-[#3A3A3A] leading-relaxed">
                 The guidance above focuses majorly on paid API usage.
             </p>
-            <p class="mt-2 text-sm text-amber-800 leading-relaxed">
+            <p class="mt-2 text-sm text-[#3A3A3A] leading-relaxed">
                 For free Gemini API key usage, the recommended limit is only seven pages per day.
             </p>
         </section>
